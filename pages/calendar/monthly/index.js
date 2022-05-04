@@ -1,5 +1,7 @@
+import CalendarHeader from '../../../components/CalendarHeader';
 
-
-export default function FirstPost() {
-    return <h1 className="title">Montlhy Calendar</h1>
+export default function Monthly() {
+    return <div className="container">
+      <CalendarHeader option="monthly" />
+    </div>
   }

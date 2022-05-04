@@ -1,11 +1,12 @@
 import LateralMenu from '../LateralMenu';
 import styles from './layout.module.scss';
+import Stack from '@mui/material/Stack';
 
 export default function Layout({ children }) {
     return (
-      <div className={styles.layoutContainer}>
+      <Stack direction="row" spacing={0} >
         <LateralMenu />
-        <main>{children}</main>
-      </div>
+        <main className={styles.main}>{children}</main>
+      </Stack>
     )
   }
