@@ -1,0 +1,73 @@
+import React from 'react';
+import Typography from '@mui/material/Typography';
+import { add, format, startOfMonth, isSameDay, getDaysInMonth } from 'date-fns';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Grid from '@mui/material/Grid';
+import Stack from '@mui/material/Stack';
+import menuItems from './helper';
+import styles from './habitsTracker.module.scss';
+
+export default function MonthlyCalendar({ monthIndex }) {
+  const [month, setMonth] = React.useState(0);
+  const [datesArr, setDatesArr] = React.useState([]);
+  const [today] = React.useState(new Date());
+
+  React.useEffect(() => {
+    const newMonth = add(new Date(), { months: monthIndex });
+    setMonth(newMonth);
+    const daysNum = getDaysInMonth(newMonth);
+    const firstDate = startOfMonth(newMonth);
+    const newDatesArr = [];
+    for (let i = 0; i < daysNum; i++) {
+      newDatesArr.push(add(firstDate, { days: i }));
+    }
+    setDatesArr(newDatesArr);
+  }, [monthIndex]);
+
+  return (
+    <div className={styles.container}>
+      <Grid container sx={{ margin: '0 2em', width: 'auto' }} spacing={2}>
+        <Grid item xs="auto" spacing={2}>
+          <Typography variant="body2" className="title" align="right" sx={{ height: 24, paddingTop: '1em' }}>{' '}</Typography>
+          {menuItems.map(i => (
+            <Typography variant="body1" className="title" align="right" sx={{ lineHeight: '32px', whiteSpace: 'nowrap' }}>{i.name}</Typography>
+          ))}
+        </Grid>
+        <Grid xs item spacing={2}>
+          <TableContainer sx={{ maxHeight: 440, paddingTop: '1em', margin: '0 0em', maxWidth: 'calc(100vw - 420px)' }}>
+            <Table stickyHeader sx={{ tableLayout: 'fixed', minWidth: '900px' }}>
+              <TableHead>
+                <TableRow>
+                  {datesArr.map(j => (
+                    <TableCell align="center" padding="none">{format(j, 'dd')}</TableCell>
+                  ))}
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {menuItems.map(i => (
+                  <TableRow>
+                    {datesArr.map(j => (
+                      <TableCell
+                        size="small"
+                        padding="none"
+                        className={isSameDay(j, today) ? styles.todayCell : styles.regularCell}
+                        sx={{ height: 30, minWidth: 30 }}>
+                        {' '}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Grid>
+      </Grid>
+    </div>
+  );
+
+}

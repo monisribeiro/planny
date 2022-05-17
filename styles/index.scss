@@ -10,22 +10,15 @@ body {
     font-family: 'Dancing Script';
 }
 
-h1, h2, h3, h4, h5, h6, p {
-    margin: 0;
+.text-center {
+    text-align: center;
 }
 
-.flex {
-    display: flex;
+.full-width {
+    width: 100%;
+}
 
-    &.space-between {
-        justify-content: space-between;
-    }
 
-    &.space-around {
-        justify-content: space-around;
-    }
-
-    &.space-evenly {
-        justify-content: space-evenly;
-    }
+h1, h2, h3, h4, h5, h6, p {
+    margin: 0;
 }

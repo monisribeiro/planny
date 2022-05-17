@@ -24,11 +24,21 @@ const menuItems = [{
 }, {
     title: 'Trackers',
     icon: <TrackChangesIcon />,
-    onClick: () => window.location.href = "/",
+    isOpened: false,
+    subItems: [{
+        title: 'Habits',
+        onClick: () => window.location.href = "/tracker/habits",
+    }, {
+        title: 'Food',
+        onClick: () => window.location.href = "/tracker/food",
+    }, {
+        title: 'Finances',
+        onClick: () => window.location.href = "/tracker/finance",
+    }]
 }, {
     title: 'Lists',
     icon: <ListAltIcon />,
-    onClick: () => window.location.href = "/",
+    onClick: () => window.location.href = "/lists",
 }]
 
 export default menuItems;

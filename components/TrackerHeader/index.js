@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './calendarHeader.module.scss';
+import styles from './trackerHeader.module.scss';
 import IconButton from '@mui/material/IconButton';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
@@ -11,15 +11,15 @@ import Stack from '@mui/material/Stack';
 import { add, format, startOfWeek, endOfWeek } from 'date-fns';
 
 const optionDateMap = {
-  daily: 'days',
-  weekly: 'weeks',
-  monthly: 'months',
+  food: 'weeks',
+  finance: 'months',
+  habits: 'months',
 };
 
 const optionFormatMap = {
-  daily: "MMM dd',' yyyy",
-  weekly: "MMM dd',' yyyy",
-  monthly: 'MMM yyyy',
+  food: "MMM dd',' yyyy",
+  finance: 'MMM yyyy',
+  habits: 'MMM yyyy',
 };
 
 
@@ -29,7 +29,7 @@ export default function CalendarHeader({ option, onDateChanged }) {
 
   React.useEffect((i) => {
     if (!option) return;
-    if (option === 'weekly') {
+    if (option === 'food') {
       const date1 = startOfWeek(add(new Date(), { [optionDateMap[option]]: page }));
       const date2 = endOfWeek(add(new Date(), { [optionDateMap[option]]: page }));
       setDateString(`${format(date1, optionFormatMap[option])} - ${format(date2, optionFormatMap[option])}`);
@@ -53,10 +53,10 @@ export default function CalendarHeader({ option, onDateChanged }) {
           </IconButton>
         </Stack>
         <Stack direction="row" spacing={8}>
-          <ToggleButtonGroup size="small" value={option} onChange={(evt, opt) => window.location.href = `/calendar/${opt}`} exclusive>
-            <ToggleButton value="monthly" key="monthly">Monthly</ToggleButton>
-            <ToggleButton value="weekly" key="weekly">Weekly</ToggleButton>
-            <ToggleButton value="daily" key="daily">Daily</ToggleButton>
+          <ToggleButtonGroup size="small" value={option} onChange={(evt, opt) => window.location.href = `/tracker/${opt}`} exclusive>
+            <ToggleButton value="habits" key="habits">Habits</ToggleButton>
+            <ToggleButton value="food" key="food">Food</ToggleButton>
+            <ToggleButton value="finance" key="finance">Finance</ToggleButton>
           </ToggleButtonGroup>
           <Fab color="primary" aria-label="add" size="small">
             <AddCircleIcon />

@@ -19,11 +19,9 @@ export default function LateralMenu({ children }) {
 
   const onItemClick = React.useCallback((i) => {
     if (i.onClick) {
-      console.log('here')
       i.onClick();
     }
 
-    console.log('here2')
     if (i.subItems) {
       i.isOpened = !i.isOpened;
       setMenuItems([...menuItems]);
@@ -33,13 +31,10 @@ export default function LateralMenu({ children }) {
   }, []);
 
   return (
-    <Collapse orientation="horizontal" in={!isCollapsed} collapsedSize={70}>
+    // <Collapse orientation="horizontal" in={!isCollapsed} collapsedSize={70}>
       <section className={styles.menu}>
         <Stack direction="row" spacing={2} justifyContent="space-between" alignItems="center">
           {!isCollapsed && <h2 className="title">Planny</h2>}
-          <IconButton aria-label="menu" color="inherit" component="span" onClick={() => setCollapsed(!isCollapsed)}>
-            <MenuIcon />
-          </IconButton>
         </Stack>
 
         <List
@@ -49,17 +44,17 @@ export default function LateralMenu({ children }) {
           disablePadding
         >
           {menuItems?.map(i => (
-            <>
+            <div key={i.title} >
               <ListItemButton key={i.title} onClick={() => onItemClick(i)} sx={{ padding: '0.5rem' }}>
                 <ListItemIcon>
                   {i.icon}
                 </ListItemIcon>
-                <ListItemText primary={i.title} />
+                <ListItemText primary={i.title} sx={{ paddingRight: '2em'}} />
                 {i.subItems && i.isOpened && <ExpandLess />}
                 {i.subItems && !i.isOpened && <ExpandMore />}
               </ListItemButton>
               {i.subItems && (
-                <Collapse in={i.isOpened} timeout="auto" unmountOnExit >
+                <Collapse in={i.isOpened && !isCollapsed} timeout="auto" unmountOnExit >
                   <List component="div" disablePadding>
                     {i.subItems?.map(j => (
                       <ListItemButton key={j.title} onClick={() => onItemClick(j)} sx={{ padding: '0.5rem' }}>
@@ -72,10 +67,10 @@ export default function LateralMenu({ children }) {
                   </List>
                 </Collapse>
               )}
-            </>
+            </div>
           ))}
         </List>
       </section>
-    </Collapse>
+    // </Collapse>
   )
 }
