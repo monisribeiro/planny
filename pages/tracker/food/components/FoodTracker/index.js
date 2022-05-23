@@ -6,7 +6,7 @@ import CardContent from '@mui/material/CardContent';
 import CardActionArea from '@mui/material/CardActionArea';
 import Typography from '@mui/material/Typography';
 import { add, format, startOfWeek, isSameDay } from 'date-fns';
-import columns from './helper';
+import columns from '../../../../../helpers/FoodTrackerHelper';
 import styles from './foodTracker.module.scss';
 
 export default function WeeklyCalendar({ weekIndex, items, onItemClick }) {

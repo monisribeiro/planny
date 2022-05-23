@@ -22,10 +22,10 @@ export default function MonthlyCalendar({ name, type, items, onCardClick }) {
           <CardContent>
             <Stack direction="row" spacing={2} justifyContent="space-between" alignItems="center">
               <Typography variant="h5" className="title" align="left">{name}</Typography>
-              <Typography variant="overline" align="right">{items.length} items</Typography>
+              <Typography variant="overline" align="right">{items?.length} items</Typography>
             </Stack>
             <List sx={{ width: '100%', height: '200px', overflow: 'scroll' }} dense>
-              {items.map((i, ind) => (
+              {items?.map((i, ind) => (
                 <ListItem >
                   <ListItemIcon sx={{ minWidth: 30 }}>
                     {type === 'todo' ? (

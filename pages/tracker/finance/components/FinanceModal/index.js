@@ -66,7 +66,7 @@ export default function ListModal({ item, onClose, onSave, onDelete }) {
             </FormControl>
           </Grid>
           <Grid item xs={6}>
-            <TextField onChange={(evt) => changePrice(evt)} className="title" id="standard-basic" value={item.amount} label="Amount" />
+            <TextField onChange={(evt) => changePrice(evt)} className="title" id="standard-basic" value={item?.amount} label="Amount" />
           </Grid>
           <Grid item xs={6}>
             <LocalizationProvider dateAdapter={AdapterDateFns}>

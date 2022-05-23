@@ -4,7 +4,7 @@ import Container from '@mui/material/Container';
 import ListHeader from '../../components/ListHeader';
 import ListComponent from './components/ListComponent';
 import ListModal from './components/ListModal';
-import listHelper from './helper';
+import listHelper from '../../helpers/ListsHelper';
 
 export default function Monthly() {
   const [list, setList] = React.useState(listHelper);

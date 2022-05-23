@@ -2,7 +2,7 @@ import React from 'react';
 import TrackerHeader from '../../../components/TrackerHeader';
 import HabitsTracker from './components/HabitsTracker';
 import HabitsModal from './components/HabitsModal';
-import menuItems from './helper';
+import menuItems from '../../../helpers/HabitsHelper';
 
 export default function Monthly() {
   const [monthIndex, setMonthIndex] = React.useState(0);

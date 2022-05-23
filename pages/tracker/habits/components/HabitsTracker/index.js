@@ -10,7 +10,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Grid from '@mui/material/Grid';
 import styles from './habitsTracker.module.scss';
-import eventsHelper from './events';
+import eventsHelper from '../../../../../helpers/HabisTrackerHelper';
 
 export default function MonthlyCalendar({ monthIndex, onHabitClick, items }) {
   const [month, setMonth] = React.useState(0);
@@ -53,7 +53,7 @@ export default function MonthlyCalendar({ monthIndex, onHabitClick, items }) {
       <Grid container sx={{ margin: '0 2em', width: 'auto' }} spacing={2}>
         <Grid item xs="auto" spacing={2}>
           <Typography variant="body2" className="title" color="inherit" underline="hover" sx={{ height: 24, paddingTop: '1em' }}>{' '}</Typography>
-          {items.map((i, ind) => (
+          {items?.map((i, ind) => (
               <Link color="text.primary" variant="body1" component="div" onClick={() => onHabitClick(ind)} className="title" align="right" sx={{ lineHeight: '32px', whiteSpace: 'nowrap', textAlign: 'right' }}>{i.name}</Link>
           ))}
         </Grid>
@@ -62,15 +62,15 @@ export default function MonthlyCalendar({ monthIndex, onHabitClick, items }) {
             <Table stickyHeader sx={{ tableLayout: 'fixed', minWidth: '900px' }}>
               <TableHead>
                 <TableRow>
-                  {datesArr.map(j => (
+                  {datesArr?.map(j => (
                     <TableCell align="center" padding="none">{format(j, 'dd')}</TableCell>
                   ))}
                 </TableRow>
               </TableHead>
               <TableBody>
-                {items.map(i => (
+                {items?.map(i => (
                   <TableRow>
-                    {datesArr.map(j => (
+                    {datesArr?.map(j => (
                       <TableCell
                         size="small"
                         padding="none"

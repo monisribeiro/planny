@@ -51,10 +51,10 @@ export default function ListModal({ item, onClose, onSave, onDelete }) {
 
   return (
     <Dialog open onClose={onClose} onBackdropClick={onClose}>
-      {item.name ? (
-        <DialogTitle className="title">{item.name}</DialogTitle>
+      {item?.name ? (
+        <DialogTitle className="title">{item?.name}</DialogTitle>
       ) : (
-        <TextField sx={{ margin: '2em 1.5em 0' }} onChange={(evt) => changeName(evt)} className="title" id="standard-basic" variant="standard" value={item.name} placeholder="List name" />
+        <TextField sx={{ margin: '2em 1.5em 0' }} onChange={(evt) => changeName(evt)} className="title" id="standard-basic" variant="standard" value={item?.name} placeholder="List name" />
       )}
       <DialogContent sx={{ width: 400 }}>
         <FormControl sx={{ flexDirection: 'row', alignItems: 'center'}}>
@@ -101,7 +101,7 @@ export default function ListModal({ item, onClose, onSave, onDelete }) {
                 <AddIcon />
               ) : (<NoiseControlOffIcon />)}
             </ListItemIcon>
-            <TextField key={copyItem.items.lenght} onKeyDown={(evt) => {
+            <TextField key={copyItem.items?.lenght} onKeyDown={(evt) => {
               if (evt.key === 'Enter') {
                 addItem(evt.target.value);
                 evt.target.value = '';

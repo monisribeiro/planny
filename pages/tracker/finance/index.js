@@ -2,7 +2,7 @@ import React from 'react';
 import TrackerHeader from '../../../components/TrackerHeader';
 import FinanceTracker from './components/FinanceTracker';
 import FinanceModal from './components/FinanceModal';
-import itemsHelper from './helper';
+import itemsHelper from '../../../helpers/FinanceHelper';
 
 export default function Monthly() {
   const [monthIndex, setMonthIndex] = React.useState(0);

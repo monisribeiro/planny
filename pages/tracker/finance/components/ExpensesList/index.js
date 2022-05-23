@@ -14,7 +14,7 @@ export default function MonthlyCalendar({ items, onItemClick }) {
   return (
     <>
       <List sx={{ width: '100%', bgcolor: 'background.paper', height: 'calc(100vh - 250px)', overflow: 'scroll' }} dense>
-        {items.map((i, ind) => (
+        {items?.map((i, ind) => (
           <>
             <ListItem
               secondaryAction={<>
@@ -38,7 +38,7 @@ export default function MonthlyCalendar({ items, onItemClick }) {
         <ListItem
           secondaryAction={
             <Typography align="right">
-              {(items.reduce((res, val) => res += +val.amount, 0)).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
+              {(items?.reduce((res, val) => res += +val.amount, 0)).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
             </Typography>
           }
         >

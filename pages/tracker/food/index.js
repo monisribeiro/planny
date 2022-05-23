@@ -2,7 +2,7 @@ import React from 'react';
 import TrackerHeader from '../../../components/TrackerHeader';
 import FoodTracker from './components/FoodTracker';
 import FoodModal from './components/FoodModal';
-import itemsHelper from './helper';
+import itemsHelper from '../../../helpers/FoodHelper';
 
 export default function Monthly() {
   const [weekIndex, setWeekIndex] = React.useState(0);
