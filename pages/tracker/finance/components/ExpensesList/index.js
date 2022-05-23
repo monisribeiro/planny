@@ -2,6 +2,7 @@ import React from 'react';
 import Typography from '@mui/material/Typography';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import Badge from '@mui/material/Badge';
 import Divider from '@mui/material/Divider';
@@ -9,7 +10,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 
 import { format } from 'date-fns';
 
-export default function MonthlyCalendar({ items }) {
+export default function MonthlyCalendar({ items, onItemClick }) {
   return (
     <>
       <List sx={{ width: '100%', bgcolor: 'background.paper', height: 'calc(100vh - 250px)', overflow: 'scroll' }} dense>
@@ -21,10 +22,12 @@ export default function MonthlyCalendar({ items }) {
                 <Typography sx={{ color: 'rgba(0, 0, 0, 0.6)' }} variant="body2" align="right">{format(new Date(i.date), 'MM/dd')}</Typography>
               </>}
             >
-              <ListItemIcon sx={{ minWidth: 24 }}>
-                <Badge color="primary" variant="dot" />
-              </ListItemIcon>
-              <ListItemText primary={i.name} secondary={i.category} />
+              <ListItemButton onClick={() => onItemClick(ind)}>
+                <ListItemIcon sx={{ minWidth: 24 }}>
+                  <Badge color="primary" variant="dot" />
+                </ListItemIcon>
+                <ListItemText primary={i.name} secondary={i.category} />
+              </ListItemButton>
             </ListItem>
             {ind !== items.length - 1 && <Divider light />}
           </>

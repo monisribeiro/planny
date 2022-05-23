@@ -23,7 +23,7 @@ const optionFormatMap = {
 };
 
 
-export default function CalendarHeader({ option, onDateChanged }) {
+export default function CalendarHeader({ option, onDateChanged, onAddClick }) {
   const [page, setPage] = React.useState(0);
   const [dateString, setDateString] = React.useState();
 
@@ -58,7 +58,7 @@ export default function CalendarHeader({ option, onDateChanged }) {
             <ToggleButton value="food" key="food">Food</ToggleButton>
             <ToggleButton value="finance" key="finance">Finance</ToggleButton>
           </ToggleButtonGroup>
-          <Fab color="primary" aria-label="add" size="small">
+          <Fab color="primary" aria-label="add" size="small" onClick={onAddClick}>
             <AddCircleIcon />
           </Fab>
         </Stack>

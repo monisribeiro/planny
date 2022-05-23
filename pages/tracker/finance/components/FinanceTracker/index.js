@@ -6,11 +6,10 @@ import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 
-import { add } from 'date-fns';
-import items from './helper';
+import { add, isSameMonth } from 'date-fns';
 import ExpensesList from '../ExpensesList';
 
-export default function MonthlyCalendar({ monthIndex }) {
+export default function MonthlyCalendar({ monthIndex, items, onItemClick }) {
   const [month, setMonth] = React.useState(0);
   const [tab, setTab] = React.useState('balance');
   const [itemsList, setItemsList] = React.useState([]);
@@ -21,8 +20,8 @@ export default function MonthlyCalendar({ monthIndex }) {
   }, [monthIndex]);
 
   React.useEffect(() => {
-    setItemsList(items.sort((a, b) => (new Date(b.date) - (new Date(a.date)))));
-  }, [items]);
+    setItemsList(items.filter(i => isSameMonth(new Date(i.date), month)).sort((a, b) => (new Date(b.date) - (new Date(a.date)))));
+  }, [items, month]);
 
   return (
     <div className="container">
@@ -36,10 +35,10 @@ export default function MonthlyCalendar({ monthIndex }) {
               </TabList>
             </Box>
             <TabPanel value="balance" sx={{ padding: 0 }}>
-              <ExpensesList items={itemsList} />
+              <ExpensesList items={itemsList.filter(i => i.category !== 'Savings')} onItemClick={onItemClick} />
             </TabPanel>
             <TabPanel value="savings" sx={{ padding: 0 }}>
-              <ExpensesList items={itemsList.filter(i => i.category === 'savings')} />
+              <ExpensesList items={itemsList.filter(i => i.category === 'Savings')} onItemClick={onItemClick} />
             </TabPanel>
           </TabContext>
         </Grid>

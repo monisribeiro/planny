@@ -13,28 +13,65 @@ import TextField from '@mui/material/TextField';
 import AddIcon from '@mui/icons-material/Add';
 import Checkbox from '@mui/material/Checkbox';
 import ListItemIcon from '@mui/material/ListItemIcon';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
 import NoiseControlOffIcon from '@mui/icons-material/NoiseControlOff';
 
-export default function ListModal({ item, onClose }) {
+export default function ListModal({ item, onClose, onSave, onDelete }) {
   const [copyItem, setCopyItems] = React.useState({ ...item });
 
   const addItem = React.useCallback((newValue) => {
     copyItem.items.push({ name: newValue });
-    setCopyItems({...copyItem});
+    setCopyItems({ ...copyItem });
   });
 
   const removeItem = React.useCallback((idx) => {
     copyItem.items.splice(idx, 1);
-    setCopyItems({...copyItem});
+    setCopyItems({ ...copyItem });
+  });
+
+  const changeType = React.useCallback((evt, newType) => {
+    copyItem.type = newType;
+    setCopyItems({ ...copyItem });
+  });
+
+  const changeName = React.useCallback((evt) => {
+    copyItem.name = evt.target.value;
+    setCopyItems({ ...copyItem });
+  });
+
+  const checkItem = React.useCallback((idx) => {
+    copyItem.items[idx].checked =  !copyItem.items[idx].checked;
+    setCopyItems({ ...copyItem });
   });
 
 
   return (
     <Dialog open onClose={onClose} onBackdropClick={onClose}>
-      <DialogTitle className="title">{item.name}</DialogTitle>
+      {item.name ? (
+        <DialogTitle className="title">{item.name}</DialogTitle>
+      ) : (
+        <TextField sx={{ margin: '2em 1.5em 0' }} onChange={(evt) => changeName(evt)} className="title" id="standard-basic" variant="standard" value={item.name} placeholder="List name" />
+      )}
       <DialogContent sx={{ width: 400 }}>
+        <FormControl sx={{ flexDirection: 'row', alignItems: 'center'}}>
+          <FormLabel sx={{ marginRight: '1em'}} id="demo-row-radio-buttons-group-label">Type</FormLabel>
+          <RadioGroup
+            row
+            aria-labelledby="demo-row-radio-buttons-group-label"
+            name="row-radio-buttons-group"
+            defaultValue={copyItem.type}
+            onChange={changeType}
+          >
+            <FormControlLabel value="list" control={<Radio size="small" />} label="List" />
+            <FormControlLabel value="todo" control={<Radio size="small" />} label="Todo" />
+          </RadioGroup>
+        </FormControl>
         <List sx={{ width: '100%', overflow: 'scroll' }} dense>
-          {copyItem.items.map((i, ind) => (
+          {copyItem.items?.map((i, ind) => (
             <ListItem
               secondaryAction={
                 <IconButton edge="end" aria-label="delete" onClick={() => removeItem(ind)}>
@@ -49,6 +86,7 @@ export default function ListModal({ item, onClose }) {
                     checked={i.checked}
                     tabIndex={-1}
                     disableRipple
+                    onChange={() => checkItem(ind)}
                   />
                 ) : (<NoiseControlOffIcon />)}
               </ListItemIcon>
@@ -63,13 +101,18 @@ export default function ListModal({ item, onClose }) {
                 <AddIcon />
               ) : (<NoiseControlOffIcon />)}
             </ListItemIcon>
-            <TextField onKeyDown={(evt) => evt.key === 'Enter' && addItem(evt.target.value)} id="standard-basic" variant="standard" placeholder="New item"/>
+            <TextField key={copyItem.items.lenght} onKeyDown={(evt) => {
+              if (evt.key === 'Enter') {
+                addItem(evt.target.value);
+                evt.target.value = '';
+              }
+            }} id="standard-basic" variant="standard" placeholder="New item" />
           </ListItem>
         </List>
       </DialogContent>
       <DialogActions>
         <Button onClick={() => onSave(copyItem)}>Save</Button>
-        <Button onClick={() => onDelete(copyItem)}>Delete</Button>
+        <Button onClick={onDelete}>Delete</Button>
       </DialogActions>
     </Dialog>
   );

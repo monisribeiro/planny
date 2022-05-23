@@ -11,32 +11,27 @@ const columns = [{
     fullWidth: false,
     icon: ''
   }, {
-  key: 'BREAKFAST', 
+  key: 'Breakfast', 
   title: 'Breakfast',
   fullWidth: true,
   icon: <FreeBreakfastIcon />
 }, {
-  key: 'LUNCH', 
+  key: 'Lunch', 
   title: 'Lunch',
   fullWidth: true,
   icon: <LunchDiningIcon />
 }, {
-  key: 'DINNER', 
+  key: 'Dinner', 
   title: 'Dinner',
   fullWidth: true,
   icon: <DinnerDiningIcon />
 }, {
-  key: 'SNACKS', 
+  key: 'Snacks', 
   title: 'Snacks',
   fullWidth: true,
   icon: <IcecreamIcon />
-}, {
-  key: 'WATER', 
-  title: '',
-  fullWidth: false,
-  icon: <LocalDrinkIcon />
-}, , {
-  key: 'CALORIES', 
+} , {
+  key: 'Calories', 
   title: '',
   fullWidth: false,
   icon: <LocalFireDepartmentIcon />

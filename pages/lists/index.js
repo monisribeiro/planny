@@ -1,19 +1,40 @@
 import React from 'react';
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
+import ListHeader from '../../components/ListHeader';
 import ListComponent from './components/ListComponent';
 import ListModal from './components/ListModal';
-import list from './helper';
+import listHelper from './helper';
 
 export default function Monthly() {
-  const [selectedItem, setSelectedItem] = React.useState(undefined);
+  const [list, setList] = React.useState(listHelper);
+  const [selectedItemIndex, setSelectedItemIndex] = React.useState(undefined);
+  const [filters, setFilters] = React.useState(['list', 'todo']);
 
-  return <Container sx={{ margin: '1em'}}>
+  const saveItem = (newItem) => {
+    if (!newItem.id) {
+      newItem.id = list[list.length - 1].id + 1;
+      list.push(newItem);
+    } else {
+      list[selectedItemIndex] = newItem;
+      setList([...list]);
+    }
+    setSelectedItemIndex(undefined);
+  };
+
+  const deleteItem = () => {
+    list.splice(selectedItemIndex, 1);
+    setList([...list]);
+    setSelectedItemIndex(undefined);
+  };
+
+  return <Container sx={{ margin: '1em 0'}}>
+    <ListHeader option={filters} onFiltersChange={(ind) => setFilters(ind)} onAddClick={() => setSelectedItemIndex(-1)} />
     <Grid container spacing={2}>
-      {list?.map(item => (
-        <ListComponent {...item} onCardClick={() => setSelectedItem(item)}  />
+      {list?.filter(i => filters.includes(i.type)).map((item, ind) => (
+        <ListComponent {...item} onCardClick={() => setSelectedItemIndex(ind)}  />
       ))}
     </Grid>
-    {selectedItem && <ListModal item={selectedItem} onClose={() => setSelectedItem(undefined)}/>}
+    {(selectedItemIndex || selectedItemIndex === 0) && <ListModal item={list[selectedItemIndex] || { items: [], type: 'list', isNew: true }} onClose={() => setSelectedItemIndex(undefined)} onSave={(newItem) => saveItem(newItem)} onDelete={deleteItem}/>}
   </Container>
 }
