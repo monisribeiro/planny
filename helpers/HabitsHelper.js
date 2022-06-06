@@ -17,11 +17,11 @@ const menuItems = [{
     color: '#0093ee',
 }, {
     id: 5,
-    name: 'Listen Podcast',
+    name: 'Podcast',
     color: '#0093ee',
 }, {
     id: 6,
-    name: 'Write in journal',
+    name: 'Journal',
     color: '#0093ee',
 }, {
     id: 7,

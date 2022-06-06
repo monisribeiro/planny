@@ -1,30 +1,24 @@
 import Head from 'next/head'
-import Link from 'next/link'
+import React from 'react';
+import HomeHeader from '../components/HomeHeader';
+import HomeDaily from '../components/HomeDaily';
+import HomeMonthly from '../components/HomeMonthly';
+import HomeWeekly from '../components/HomeWeekly';
 
 export default function Home() {
+  const [option, setOption] = React.useState('weekly');
   return (
     <div className="container">
       <Head>
-        <title>Create Next App</title>
+        <title>Planny</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main>
-        <h1 className="title">
-          Home
-        </h1>
-        <h1 className="title">
-          Calendar
-          <Link href="/calendar/monthly">
-            <a>Monthly</a>
-          </Link>
-          <Link href="/calendar/weekly">
-            <a>Weekly</a>
-          </Link>
-          <Link href="/calendar/daily">
-            <a>Daily</a>
-          </Link>
-        </h1>
+        <HomeHeader option={option} changeOption={setOption}/>
+        {option === 'daily' && <HomeDaily />}
+        {option === 'monthly' && <HomeMonthly />}
+        {option === 'weekly' && <HomeWeekly />}
       </main>
     </div>
   )

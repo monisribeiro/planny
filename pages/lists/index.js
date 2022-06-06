@@ -17,8 +17,8 @@ export default function Monthly() {
       list.push(newItem);
     } else {
       list[selectedItemIndex] = newItem;
-      setList([...list]);
     }
+    setList([...list]);
     setSelectedItemIndex(undefined);
   };
 

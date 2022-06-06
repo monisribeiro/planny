@@ -8,7 +8,7 @@ import CardActionArea from '@mui/material/CardActionArea';
 import Typography from '@mui/material/Typography';
 import { add, format, isSameDay } from 'date-fns';
 
-export default function MonthlyCalendar({ dayIndex, items, onItemClick }) {
+export default function MonthlyCalendar({ dayIndex, items }) {
   const [day, setDay] = React.useState(0);
   const [data, setData] = React.useState({});
   const hours = new Array(19).fill('').map((val, ind) => (`${ind === 18 ? '00' : ind + 6}:00`));
@@ -63,7 +63,6 @@ export default function MonthlyCalendar({ dayIndex, items, onItemClick }) {
                     width: '100%',
                     height: '32px',
                   }}
-                  onClick={() => onItemClick( data[j]?.id, `${format(day, 'yyyy-MM-dd')} ${j}`)}
                 >
                   <CardContent sx={{ padding: '0em' }} >
                     <Typography align="left" variant="caption">

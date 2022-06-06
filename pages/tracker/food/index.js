@@ -11,7 +11,6 @@ export default function Monthly() {
 
   const saveItem = (newItem) => {
     if (!list[newItem.date]) {
-      console.log('hi');
       list[newItem.date] = { [newItem.category]: {
         calories: newItem.calories,
         description: newItem.description,
@@ -22,7 +21,6 @@ export default function Monthly() {
         description: newItem.description,
       };
     }
-    console.log(list);
     setList({...list});
     setSelectedItem(undefined);
   };
